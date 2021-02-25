@@ -6,6 +6,34 @@ const Intern = require("./lib/intern");
 const Manager = require("./lib/manager");
 let team = [];
 //build proms for employee
+function createEmployee() {
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        message: "What is the employee name?",
+        name: "employeeName",
+      },
+      {
+        type: "input",
+        message: "What is the employee ID?",
+        name: "employeeId",
+      },
+      {
+        type: "input",
+        message: "What is the employee email",
+        name: "employeeEmail",
+      },
+    ])
+    .then((answers) => {
+      const employee = new Employee(
+        answers.employeeName,
+        answers.employeeId,
+        answers.employeeEmail
+      );
+      team.push(employee);
+    });
+}
 function createManager() {
   inquirer
     .prompt([
@@ -30,12 +58,12 @@ function createManager() {
         name: "officeNumber",
       },
     ])
-    .then((ansers) => {
+    .then((answers) => {
       const manager = new Manager(
-        ansers.managerName,
-        ansers.managerId,
-        ansers.managerEmail,
-        ansers.officeNumber
+        answers.managerName,
+        answers.managerId,
+        answers.managerEmail,
+        answers.officeNumber
       );
       team.push(manager);
     });
