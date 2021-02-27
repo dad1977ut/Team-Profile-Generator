@@ -6,34 +6,6 @@ const Intern = require("./lib/intern");
 const Manager = require("./lib/manager");
 let team = [];
 //build proms for employee
-function createEmployee() {
-  inquirer
-    .prompt([
-      {
-        type: "input",
-        message: "What is the employee's name?",
-        name: "employeeName",
-      },
-      {
-        type: "input",
-        message: "What is the employee's ID?",
-        name: "employeeId",
-      },
-      {
-        type: "input",
-        message: "What is the employee's email",
-        name: "employeeEmail",
-      },
-    ])
-    .then((answers) => {
-      const employee = new Employee(
-        answers.employeeName,
-        answers.employeeId,
-        answers.employeeEmail
-      );
-      team.push(employee);
-    });
-}
 function createEngineer() {
   inquirer
     .prompt([
@@ -65,8 +37,9 @@ function createEngineer() {
         answers.engineerEmail,
         answers.username
       );
-      team.push(employee);
-    });
+      team.push(engineer);
+    })
+    .then(() => whatType());
 }
 function createIntern() {
   inquirer
@@ -99,8 +72,9 @@ function createIntern() {
         answers.engineerEmail,
         answers.school
       );
-      team.push(employee);
-    });
+      team.push(intern);
+    })
+    .then(() => whatType());
 }
 function createManager() {
   inquirer
@@ -134,8 +108,30 @@ function createManager() {
         answers.officeNumber
       );
       team.push(manager);
+    })
+    .then(() => whatType());
+}
+function whatType() {
+  inquirer
+    .prompt({
+      type: "input",
+      message: "What type of employee would you like to enter?",
+      name: "employeeRole",
+      choices: ["engineer", "intern", "manager", "Done"],
+    })
+    .then((answers) => {
+      if (answers.employeeRole === "engineer") {
+        createEngineer();
+      } else if (answers.employeeRole === "intern") {
+        createIntern();
+      } else if (answers.employeeRole === "manager") {
+        createManager();
+      } else if (answers.employeeRole === "Done") {
+      }
+      console.log(team);
     });
 }
+whatType();
 
 //add info to new employee
 //put into templet
