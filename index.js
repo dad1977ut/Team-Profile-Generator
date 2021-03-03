@@ -116,7 +116,8 @@ const generateTeam = () => {
   let html = "";
   for (let index = 0; index < team.length; index++) {
     const person = team[index];
-    html += `<div class="card" style="width: 18rem;">
+    if (person.getrole() === "Manager") {
+      html += `<div class="card" style="width: 18rem;">
     <div class="card-header">
     ${person.name}<br>
     ${person.getrole()}
@@ -124,13 +125,14 @@ const generateTeam = () => {
     <ul class="list-group list-group-flush">
       <li class="list-group-item">id: ${person.id}</li>
       <li class="list-group-item">email: <a href="mailto:${person.email}">${
-      person.email
-    }</a></li>
+        person.email
+      }</a></li>
       <li class="list-group-item">office number: ${person.officeNumber}</li>
     </ul>
   </div>`;
-    return html;
+    }
   }
+  return html;
 };
 const generatePage = () => {
   return `<!DOCTYPE html>
