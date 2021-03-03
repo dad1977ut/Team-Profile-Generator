@@ -226,7 +226,6 @@ function whatType() {
       } else if (answers.employeeRole === "done") {
         fs.writeFileSync("index.html", generatePage());
       }
-      console.log(team);
     });
 }
 whatType();
