@@ -130,8 +130,38 @@ const generateTeam = () => {
       <li class="list-group-item">office number: ${person.officeNumber}</li>
     </ul>
   </div>`;
+    } else if (person.getrole() === "Intern") {
+      html += `<div class="card" style="width: 18rem;">
+    <div class="card-header">
+    ${person.name}<br>
+    ${person.getrole()}
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">id: ${person.id}</li>
+      <li class="list-group-item">email: <a href="mailto:${person.email}">${
+        person.email
+      }</a></li>
+      <li class="list-group-item">school: ${person.getSchool()}</li>
+    </ul>
+  </div>`;
+    } else if (person.getrole() === "Engineer") {
+      console.log("engineer");
+      html += `<div class="card" style="width: 18rem;">
+  <div class="card-header">
+  ${person.name}<br>
+  ${person.getrole()}
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">id: ${person.id}</li>
+    <li class="list-group-item">email: <a href="${person.email}">${
+        person.email
+      }</a></li>
+    <li class="list-group-item">github: <a href="https://github.com/${person.getGithub()}">${person.getGithub()}</a></li>
+  </ul>
+</div>`;
     }
   }
+
   return html;
 };
 const generatePage = () => {
